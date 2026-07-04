@@ -63,6 +63,15 @@ BODY = r'''<script>
   var SIGNUP=['try for free','start free trial','start for free','sign up','get started'];
   var TALK=['talk to sales','contact sales'];
   var WATCH=['watch demo','watch now','watch now →','watch the full tour'];
+  // Responsive CSS injected at runtime — the React app strips styles added to
+  // static <head>, so we (re)insert this via JS and keep it alive on mutations.
+  var RESPCSS='@media (max-width:860px){.showcase{flex-direction:column!important;gap:28px!important;align-items:stretch!important}.showcase>*{width:100%!important;max-width:100%!important}.page.fx.gap24:not(.wrap){flex-wrap:wrap!important}.page.fx.gap24:not(.wrap)>*{flex:1 1 100%!important;min-width:0!important}.grid{grid-template-columns:1fr!important}.sect{height:auto!important;min-height:0!important}.page{max-width:100%!important;padding-left:20px!important;padding-right:20px!important;box-sizing:border-box!important}img{max-width:100%!important}html,body{overflow-x:hidden!important}}@media (max-width:520px){.grid.tc,.page.grid{grid-template-columns:1fr!important}.fx.ac.jc.gap8.wrap{gap:6px!important}}';
+  function ensureStyle(){
+    if(!document.getElementById('peers-responsive-js')){
+      var st=document.createElement('style'); st.id='peers-responsive-js'; st.textContent=RESPCSS;
+      (document.head||document.documentElement).appendChild(st);
+    }
+  }
   function txt(el){return (el.textContent||'').trim().replace(/\s+/g,' ').toLowerCase();}
   function pick(t){
     if(LOGIN.indexOf(t)>=0)return APP_URL;
@@ -72,6 +81,7 @@ BODY = r'''<script>
     return null;
   }
   function wire(){
+    ensureStyle();
     document.querySelectorAll('a,button').forEach(function(el){
       var d=pick(txt(el)); if(!d)return;
       if(el.tagName==='A' && d!==DEMO)el.setAttribute('href',d);
