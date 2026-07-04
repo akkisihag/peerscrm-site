@@ -199,7 +199,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.querySelectorAll('.vidframe').forEach(function(el){
       el.setAttribute('data-peers',DEMO);
       el.style.cursor='pointer';
-      el.style.backgroundImage="linear-gradient(rgba(6,16,42,.32),rgba(6,16,42,.42)), url('/demo-thumb.svg')";
+    });
+    document.querySelectorAll('.vstripe').forEach(function(el){
+      el.style.backgroundImage="linear-gradient(rgba(6,16,42,.30),rgba(6,16,42,.42)), url('/demo-thumb.svg')";
       el.style.backgroundSize='cover';
       el.style.backgroundPosition='center';
       el.style.backgroundRepeat='no-repeat';
