@@ -14,6 +14,25 @@
 <meta name="twitter:title" content="PeersCRM">
 <meta name="twitter:description" content="Projects, clients, subcontractors, and client-ready reports — everything your company runs on, together.">
 <meta name="twitter:image" content="https://www.peerscrm.com/og-image.png">
+<style id="peers-responsive">
+/* Mobile responsiveness: the exported design is desktop-only (only shrinks
+   headings). These overrides stack the two-column sections, collapse the
+   fixed-pixel grids, and stop content being clipped/overflowing on phones. */
+@media (max-width: 860px){
+  .showcase{ flex-direction: column !important; gap: 28px !important; align-items: stretch !important; }
+  .showcase > *{ width: 100% !important; max-width: 100% !important; }
+  .grid{ grid-template-columns: 1fr !important; }
+  .page.fx{ flex-wrap: wrap !important; }
+  .sect{ height: auto !important; min-height: 0 !important; }
+  .page{ max-width: 100% !important; padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box !important; }
+  img, video{ max-width: 100% !important; height: auto !important; }
+  html, body{ overflow-x: hidden !important; }
+}
+@media (max-width: 520px){
+  .grid.tc, .page.grid{ grid-template-columns: 1fr !important; }
+  .fx.ac.jc.gap8.wrap{ gap: 6px !important; }
+}
+</style>
 
   <meta charset="utf-8">
   <title>PeersCRM — CRM for contractors &amp; growing businesses</title>
