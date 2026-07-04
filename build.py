@@ -30,13 +30,20 @@ HEAD = '''<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
    headings). These overrides stack the two-column sections, collapse the
    fixed-pixel grids, and stop content being clipped/overflowing on phones. */
 @media (max-width: 860px){
+  /* stack the alternating two-column feature blocks */
   .showcase{ flex-direction: column !important; gap: 28px !important; align-items: stretch !important; }
   .showcase > *{ width: 100% !important; max-width: 100% !important; }
+  /* stack the hero (text + dashboard card); NOT the header (.page.fx.ac.jb) or footer (.wrap) */
+  .page.fx.gap24:not(.wrap){ flex-wrap: wrap !important; }
+  .page.fx.gap24:not(.wrap) > *{ flex: 1 1 100% !important; min-width: 0 !important; }
+  /* fixed-pixel grids -> single column */
   .grid{ grid-template-columns: 1fr !important; }
-  .page.fx{ flex-wrap: wrap !important; }
+  /* remove fixed section heights that clip content (e.g. the cut-off button) */
   .sect{ height: auto !important; min-height: 0 !important; }
+  /* full-width container with side padding */
   .page{ max-width: 100% !important; padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box !important; }
-  img, video{ max-width: 100% !important; height: auto !important; }
+  /* cap oversized content images WITHOUT distorting fixed-size logos (no height:auto) */
+  img{ max-width: 100% !important; }
   html, body{ overflow-x: hidden !important; }
 }
 @media (max-width: 520px){
