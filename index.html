@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="description" content="Projects, clients, subcontractors, and client-ready reports — everything your company runs on, together.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.peerscrm.com/">
+<meta property="og:title" content="PeersCRM — CRM for contractors & growing businesses">
+<meta property="og:description" content="Projects, clients, subcontractors, and client-ready reports — everything your company runs on, together.">
+<meta property="og:image" content="https://www.peerscrm.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PeersCRM">
+<meta name="twitter:description" content="Projects, clients, subcontractors, and client-ready reports — everything your company runs on, together.">
+<meta name="twitter:image" content="https://www.peerscrm.com/og-image.png">
+
   <meta charset="utf-8">
-  <title>Bundled Page</title>
+  <title>PeersCRM — CRM for contractors &amp; growing businesses</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #eaf5fe; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -196,15 +210,10 @@ document.addEventListener('DOMContentLoaded', async function() {
       if(el.tagName==='A' && d!==DEMO)el.setAttribute('href',d);
       el.setAttribute('data-peers',d);
     });
-    document.querySelectorAll('.vidframe').forEach(function(el){
-      el.setAttribute('data-peers',DEMO);
-      el.style.cursor='pointer';
-    });
+    document.querySelectorAll('.vidframe').forEach(function(el){ el.setAttribute('data-peers',DEMO); el.style.cursor='pointer'; });
     document.querySelectorAll('.vstripe').forEach(function(el){
       el.style.backgroundImage="linear-gradient(rgba(6,16,42,.30),rgba(6,16,42,.42)), url('/demo-thumb.svg')";
-      el.style.backgroundSize='cover';
-      el.style.backgroundPosition='center';
-      el.style.backgroundRepeat='no-repeat';
+      el.style.backgroundSize='cover'; el.style.backgroundPosition='center'; el.style.backgroundRepeat='no-repeat';
     });
   }
   function openDemo(){
