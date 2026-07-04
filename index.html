@@ -177,24 +177,47 @@ document.addEventListener('DOMContentLoaded', async function() {
   var APP_URL='https://app.peerscrm.com/';
   var TRIAL=('mailto:info@peerscrm.com?subject='+encodeURIComponent('PeersCRM Free Trial / Access Request')+'&body='+encodeURIComponent("Hi PeersCRM team,\n\nI'd like to try PeersCRM for free. Please send me an invite.\n\nName:\nCompany:\nPhone:\n\nThanks!"));
   var SALES=('mailto:info@peerscrm.com?subject='+encodeURIComponent('PeersCRM — Talk to Sales')+'&body='+encodeURIComponent("Hi PeersCRM team,\n\nI'd like to talk to sales about PeersCRM.\n\nName:\nCompany:\nPhone:\n\nThanks!"));
-  var DEMO='/demo.html';
+  var DEMO='__peers_demo__';
   var LOGIN=['sign in','log in','login'];
   var SIGNUP=['try for free','start free trial','start for free','sign up','get started'];
   var TALK=['talk to sales','contact sales'];
-  var WATCH=['watch demo','watch now','watch now →'];
+  var WATCH=['watch demo','watch now','watch now →','watch the full tour'];
   function txt(el){return (el.textContent||'').trim().replace(/\s+/g,' ').toLowerCase();}
-  function pick(t){ if(LOGIN.indexOf(t)>=0)return APP_URL; if(SIGNUP.indexOf(t)>=0)return TRIAL; if(TALK.indexOf(t)>=0)return SALES; if(WATCH.indexOf(t)>=0)return DEMO; return null; }
+  function pick(t){
+    if(LOGIN.indexOf(t)>=0)return APP_URL;
+    if(SIGNUP.indexOf(t)>=0)return TRIAL;
+    if(TALK.indexOf(t)>=0)return SALES;
+    if(WATCH.indexOf(t)>=0 || /play the.*demo/.test(t))return DEMO;
+    return null;
+  }
   function wire(){
     document.querySelectorAll('a,button').forEach(function(el){
       var d=pick(txt(el)); if(!d)return;
-      if(el.tagName==='A')el.setAttribute('href',d);
+      if(el.tagName==='A' && d!==DEMO)el.setAttribute('href',d);
       el.setAttribute('data-peers',d);
     });
+    document.querySelectorAll('.vidframe').forEach(function(el){ el.setAttribute('data-peers',DEMO); el.style.cursor='pointer'; });
+  }
+  function openDemo(){
+    if(document.getElementById('peersDemoModal'))return;
+    var o=document.createElement('div'); o.id='peersDemoModal';
+    o.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(6,12,34,.88);display:flex;align-items:center;justify-content:center;padding:24px;';
+    var box=document.createElement('div'); box.style.cssText='position:relative;width:min(1100px,96vw);aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,.55);';
+    var f=document.createElement('iframe'); f.src='/demo.html'; f.style.cssText='width:100%;height:100%;border:0;display:block;'; f.setAttribute('allow','autoplay; fullscreen; encrypted-media');
+    var c=document.createElement('button'); c.setAttribute('aria-label','Close'); c.textContent='✕';
+    c.style.cssText='position:fixed;top:18px;right:22px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#0b1220;font-size:18px;line-height:1;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35);';
+    function close(){ o.remove(); document.removeEventListener('keydown',esc); }
+    function esc(e){ if(e.key==='Escape')close(); }
+    c.addEventListener('click',close);
+    o.addEventListener('click',function(e){ if(e.target===o)close(); });
+    document.addEventListener('keydown',esc);
+    box.appendChild(f); o.appendChild(box); o.appendChild(c); document.body.appendChild(o);
   }
   document.addEventListener('click',function(e){
-    var el=e.target.closest&&e.target.closest('a,button'); if(!el)return;
-    var d=el.getAttribute&&el.getAttribute('data-peers'); if(!d)return;
-    e.preventDefault(); e.stopPropagation(); window.location.href=d;
+    var el=e.target.closest&&e.target.closest('[data-peers]'); if(!el)return;
+    var d=el.getAttribute('data-peers'); if(!d)return;
+    e.preventDefault(); e.stopPropagation();
+    if(d===DEMO)openDemo(); else window.location.href=d;
   },true);
   try{ new MutationObserver(wire).observe(document.documentElement,{childList:true,subtree:true}); }catch(_){}
   if(document.readyState!=='loading') wire(); else document.addEventListener('DOMContentLoaded',wire);
