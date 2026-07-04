@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e3a86"/>
+      <stop offset="1" stop-color="#071a45"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b98f2"/>
+      <stop offset="1" stop-color="#3a63d8"/>
+    </linearGradient>
+    <pattern id="stripes" width="34" height="34" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="17" height="34" fill="#ffffff" opacity="0.03"/>
+    </pattern>
+    <radialGradient id="scrim" cx="50%" cy="47%" r="42%">
+      <stop offset="0" stop-color="#05122f" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#05122f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect width="1280" height="720" fill="url(#stripes)"/>
+  <g opacity="0.92">
+    <rect x="250" y="150" width="780" height="430" rx="18" fill="#ffffff" opacity="0.09"/>
+    <rect x="250" y="150" width="780" height="52" rx="18" fill="#ffffff" opacity="0.06"/>
+    <circle cx="286" cy="176" r="6" fill="#ff6058"/>
+    <circle cx="308" cy="176" r="6" fill="#ffbd2e"/>
+    <circle cx="330" cy="176" r="6" fill="#28c840"/>
+    <text x="366" y="182" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#ffffff" opacity="0.72" font-weight="700">PeersCRM &#183; Reports</text>
+    <text x="300" y="302" font-family="Arial, Helvetica, sans-serif" font-size="58" fill="#8fb0ff" font-weight="800">$84,600</text>
+    <text x="303" y="330" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#ffffff" opacity="0.55">pipeline value this quarter</text>
+    <rect x="520" y="430" width="70" height="90" rx="8" fill="url(#bar)"/>
+    <rect x="620" y="390" width="70" height="130" rx="8" fill="url(#bar)"/>
+    <rect x="720" y="350" width="70" height="170" rx="8" fill="url(#bar)"/>
+    <rect x="820" y="300" width="70" height="220" rx="8" fill="url(#bar)"/>
+    <rect x="876" y="167" width="124" height="30" rx="15" fill="#2fbf6b" opacity="0.28"/>
+    <text x="894" y="187" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8ff0b8" font-weight="700">Client-ready &#10003;</text>
+  </g>
+  <rect width="1280" height="720" fill="url(#scrim)"/>
+</svg>

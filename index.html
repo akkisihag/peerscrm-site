@@ -196,14 +196,21 @@ document.addEventListener('DOMContentLoaded', async function() {
       if(el.tagName==='A' && d!==DEMO)el.setAttribute('href',d);
       el.setAttribute('data-peers',d);
     });
-    document.querySelectorAll('.vidframe').forEach(function(el){ el.setAttribute('data-peers',DEMO); el.style.cursor='pointer'; });
+    document.querySelectorAll('.vidframe').forEach(function(el){
+      el.setAttribute('data-peers',DEMO);
+      el.style.cursor='pointer';
+      el.style.backgroundImage="linear-gradient(rgba(6,16,42,.32),rgba(6,16,42,.42)), url('/demo-thumb.svg')";
+      el.style.backgroundSize='cover';
+      el.style.backgroundPosition='center';
+      el.style.backgroundRepeat='no-repeat';
+    });
   }
   function openDemo(){
     if(document.getElementById('peersDemoModal'))return;
     var o=document.createElement('div'); o.id='peersDemoModal';
     o.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(6,12,34,.88);display:flex;align-items:center;justify-content:center;padding:24px;';
     var box=document.createElement('div'); box.style.cssText='position:relative;width:min(1100px,96vw);aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,.55);';
-    var f=document.createElement('iframe'); f.src='/demo.html'; f.style.cssText='width:100%;height:100%;border:0;display:block;'; f.setAttribute('allow','autoplay; fullscreen; encrypted-media');
+    var f=document.createElement('iframe'); f.src='/demo.html?autoplay=1'; f.style.cssText='width:100%;height:100%;border:0;display:block;'; f.setAttribute('allow','autoplay; fullscreen; encrypted-media');
     var c=document.createElement('button'); c.setAttribute('aria-label','Close'); c.textContent='✕';
     c.style.cssText='position:fixed;top:18px;right:22px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#0b1220;font-size:18px;line-height:1;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35);';
     function close(){ o.remove(); document.removeEventListener('keydown',esc); }
