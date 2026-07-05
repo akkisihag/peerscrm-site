@@ -83,8 +83,20 @@ BODY = r'''<script>
     if(WATCH.indexOf(t)>=0 || /play the.*demo/.test(t))return DEMO;
     return null;
   }
+  function wireLegal(){
+    // The footer ships "Privacy · Terms" as plain text — turn it into links.
+    var all=document.querySelectorAll('div,span,p,li');
+    for(var i=0;i<all.length;i++){
+      var el=all[i];
+      if(el.childElementCount===0 && !el.getAttribute('data-peers-legal') && txt(el)==='privacy · terms'){
+        el.setAttribute('data-peers-legal','1');
+        el.innerHTML='<a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/terms.html" style="color:inherit;text-decoration:underline">Terms</a>';
+      }
+    }
+  }
   function wire(){
     ensureStyle();
+    wireLegal();
     document.querySelectorAll('a,button').forEach(function(el){
       var d=pick(txt(el)); if(!d)return;
       if(el.tagName==='A' && d!==DEMO){
