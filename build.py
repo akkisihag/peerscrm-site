@@ -56,9 +56,9 @@ HEAD = '''<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
 BODY = r'''<script>
 (function(){
   var APP_URL='https://app.peerscrm.com/';
-  /* The CRM now has public self-signup with a 30-day trial, so "Try for free"
-     goes straight to the app's signup screen (was a mailto invite request). */
-  var TRIAL='https://app.peerscrm.com/signup';
+  /* "Try for free" lands on the app root like Sign in; the login screen has
+     the Start Free Trial button for the 30-day self-signup. */
+  var TRIAL='https://app.peerscrm.com/';
   var SALES=('mailto:info@peerscrm.com?subject='+encodeURIComponent('PeersCRM — Talk to Sales')+'&body='+encodeURIComponent("Hi PeersCRM team,\n\nI'd like to talk to sales about PeersCRM.\n\nName:\nCompany:\nPhone:\n\nThanks!"));
   var DEMO='__peers_demo__';
   var LOGIN=['sign in','log in','login'];
