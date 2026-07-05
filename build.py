@@ -12,7 +12,8 @@ src = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_SRC
 TITLE = 'PeersCRM — CRM for contractors &amp; growing businesses'
 DESC = 'Projects, clients, subcontractors, and client-ready reports — everything your company runs on, together.'
 
-HEAD = '''<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+HEAD = '''<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="description" content="''' + DESC + '''">
