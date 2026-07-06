@@ -56,10 +56,10 @@ HEAD = '''<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 
 BODY = r'''<script>
 (function(){
-  var APP_URL='https://app.peerscrm.com/';
+  var APP_URL='https://crm.peerscrm.com/';
   /* "Try for free" lands on the app root like Sign in; the login screen has
      the Start Free Trial button for the 30-day self-signup. */
-  var TRIAL='https://app.peerscrm.com/';
+  var TRIAL='https://crm.peerscrm.com/';
   var SALES=('mailto:info@peerscrm.com?subject='+encodeURIComponent('PeersCRM — Talk to Sales')+'&body='+encodeURIComponent("Hi PeersCRM team,\n\nI'd like to talk to sales about PeersCRM.\n\nName:\nCompany:\nPhone:\n\nThanks!"));
   var DEMO='__peers_demo__';
   var LOGIN=['sign in','log in','login'];
