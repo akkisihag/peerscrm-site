@@ -143,6 +143,9 @@ html = io.open(src, encoding='utf-8', errors='ignore').read()
 # Fix the browser-tab title (source ships "Bundled Page")
 html = re.sub(r'<title>.*?</title>', '<title>' + TITLE + '</title>', html, count=1, flags=re.S)
 
+# The product trial is 30 days (self-signup), but the design copy says 14.
+html = html.replace('14-day free trial', '30-day free trial')
+
 # Inject head tags right after <head...>
 m = re.search(r'<head[^>]*>', html)
 if m:
