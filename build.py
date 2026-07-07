@@ -6,7 +6,7 @@
 import sys, io, os, re
 
 DEST = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'index.html')
-DEFAULT_SRC = os.path.expanduser('~/Downloads/PeersCRM Local Site 2/PeersCRM Website.html')
+DEFAULT_SRC = os.path.expanduser('~/Downloads/PeersCRM Local Site 3/PeersCRM Website.html')
 src = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_SRC
 
 TITLE = 'PeersCRM — CRM for contractors &amp; growing businesses'
