@@ -220,9 +220,11 @@ document.addEventListener('DOMContentLoaded', async function() {
   var TRIAL='https://crm.peerscrm.com/signup';
   var SALES=('mailto:info@peerscrm.com?subject='+encodeURIComponent('PeersCRM — Talk to Sales')+'&body='+encodeURIComponent("Hi PeersCRM team,\n\nI'd like to talk to sales about PeersCRM.\n\nName:\nCompany:\nPhone:\n\nThanks!"));
   var DEMO='__peers_demo__';
+  var CONTACT=('mailto:info@peerscrm.com?subject='+encodeURIComponent('PeersCRM — Question'));
   var LOGIN=['sign in','log in','login'];
-  var SIGNUP=['try for free','start free trial','start for free','sign up','get started'];
+  var SIGNUP=['try for free','start free trial','start for free','sign up','get started','explore projects'];
   var TALK=['talk to sales','contact sales'];
+  var HELP=['contact us','support'];
   var WATCH=['watch demo','watch now','watch now →','watch the full tour'];
   // Responsive CSS injected at runtime — the React app strips styles added to
   // static <head>, so we (re)insert this via JS and keep it alive on mutations.
@@ -238,6 +240,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     if(LOGIN.indexOf(t)>=0)return APP_URL;
     if(SIGNUP.indexOf(t)>=0)return TRIAL;
     if(TALK.indexOf(t)>=0)return SALES;
+    if(HELP.indexOf(t)>=0)return CONTACT;
     if(WATCH.indexOf(t)>=0 || /play the.*demo/.test(t))return DEMO;
     return null;
   }
