@@ -325,6 +325,23 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.addEventListener('keydown',esc);
     box.appendChild(f); o.appendChild(box); o.appendChild(c); document.body.appendChild(o);
   }
+  /* Contact form: the design's "Send message" button only flips to a success
+     screen (sendMessage just sets sent:true) — it never delivers anything.
+     Read the fields on capture (before React clears them) and POST to the
+     Supabase contact-form function, which emails info@peerscrm.com. We do NOT
+     preventDefault, so React still shows its "Message sent!" confirmation. */
+  var CONTACT_EP='https://rrxejaeiurdpntfczxbe.supabase.co/functions/v1/contact-form';
+  function isSendBtn(el){ return el && (el.tagName==='BUTTON'||el.tagName==='A') && /^send\s+message$/i.test((el.textContent||'').trim()); }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('button,a'); if(!isSendBtn(btn))return;
+    var root=btn; for(var k=0;k<10&&root;k++){ if(root.querySelector&&root.querySelector('input,textarea'))break; root=root.parentElement; }
+    if(!root)return;
+    function val(ph){ var el=root.querySelector('[placeholder="'+ph+'"]'); return el?(el.value||'').trim():''; }
+    var ta=root.querySelector('textarea');
+    var payload={ name:val('Your name'), company:val('Company name'), email:val('you@company.com'), message:ta?(ta.value||'').trim():'' };
+    if(!payload.name && !payload.email && !payload.message) return;
+    try{ fetch(CONTACT_EP,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}); }catch(_){}
+  },true);
   document.addEventListener('click',function(e){
     var el=e.target.closest&&e.target.closest('[data-peers]'); if(!el)return;
     var d=el.getAttribute('data-peers'); if(!d)return;
