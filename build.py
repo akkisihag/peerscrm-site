@@ -95,6 +95,9 @@ BODY = r'''<script>
   }
   function wire(){
     ensureStyle();
+    /* React hydration clears the static <title>; keep it set from here. */
+    var T='PeersCRM — CRM for contractors & growing businesses';
+    if(document.title!==T) document.title=T;
     wireLegal();
     document.querySelectorAll('a,button').forEach(function(el){
       var d=pick(txt(el)); if(!d)return;
@@ -108,6 +111,12 @@ BODY = r'''<script>
     document.querySelectorAll('.vstripe').forEach(function(el){
       el.style.backgroundImage="linear-gradient(rgba(6,16,42,.30),rgba(6,16,42,.42)), url('/demo-thumb.svg')";
       el.style.backgroundSize='cover'; el.style.backgroundPosition='center'; el.style.backgroundRepeat='no-repeat';
+    });
+    /* Safety net: any inline demo iframe still pointing at the designer's
+       local export file gets redirected to the deployed demo. */
+    document.querySelectorAll('iframe').forEach(function(f){
+      var s=f.getAttribute('src')||'';
+      if(/PeersCRM(%20| )Demo\.html/.test(s)) f.setAttribute('src','/demo.html?autoplay=1');
     });
   }
   function openDemo(){
@@ -145,6 +154,14 @@ html = re.sub(r'<title>.*?</title>', '<title>' + TITLE + '</title>', html, count
 
 # The product trial is 30 days (self-signup), but the design copy says 14.
 html = html.replace('14-day free trial', '30-day free trial')
+
+# The demo was recut to 90 seconds; design copy still advertises 3½ minutes.
+html = html.replace('3½-minute demo', '90-second demo')
+html = html.replace('a full product tour in 3½ minutes', 'a full product tour in 90 seconds')
+
+# The design's inline demo players point at the designer's local export file;
+# on the deployed site the demo lives at /demo.html.
+html = html.replace('PeersCRM Demo.html', '/demo.html')
 
 # Inject head tags right after <head...>
 m = re.search(r'<head[^>]*>', html)
