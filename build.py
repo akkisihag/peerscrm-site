@@ -89,7 +89,7 @@ BODY = r'''<script>
       var el=all[i];
       if(el.childElementCount===0 && !el.getAttribute('data-peers-legal') && txt(el)==='privacy · terms'){
         el.setAttribute('data-peers-legal','1');
-        el.innerHTML='<a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/terms.html" style="color:inherit;text-decoration:underline">Terms</a>';
+        el.innerHTML='<a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/terms.html" style="color:inherit;text-decoration:underline">Terms</a> · <a href="/refunds.html" style="color:inherit;text-decoration:underline">Refunds</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a>';
       }
     }
   }
