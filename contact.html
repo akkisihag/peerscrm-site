@@ -26,6 +26,14 @@
   .card{border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:#fff}
   .card h3{margin:0 0 6px;font-size:1rem;color:var(--ink)}
   .card p{margin:0}
+  .cform{margin:6px 0 8px}
+  .cform .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .cform input,.cform textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 14px;font:inherit;color:var(--ink);margin-top:12px;background:#fff}
+  .cform input:focus,.cform textarea:focus{outline:2px solid rgba(30,138,94,.25);border-color:#1e8a5e}
+  .cform button{margin-top:14px;background:#1e8a5e;color:#fff;font-weight:700;border:0;border-radius:10px;padding:12px 26px;font:inherit;cursor:pointer}
+  .cform button:disabled{opacity:.6;cursor:default}
+  .cnote{font-size:14px;margin-top:12px}
+  @media(max-width:600px){.cform .row{grid-template-columns:1fr}}
   .biz{background:var(--soft);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-top:8px}
   .biz .legal-meta{color:var(--muted);font-size:14px;line-height:1.8;margin:0}
   footer{border-top:1px solid var(--border);color:var(--muted);font-size:14px;margin-top:40px}
@@ -58,6 +66,41 @@
       <p>+1 303 210 8934</p>
     </div>
   </div>
+
+  <h2>Send us a message</h2>
+  <form id="cform" class="cform" novalidate>
+    <div class="row">
+      <input name="name" placeholder="Your name" autocomplete="name" required>
+      <input name="company" placeholder="Company name" autocomplete="organization">
+    </div>
+    <input name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+    <textarea name="message" rows="5" placeholder="Tell us a little about your team and what you're looking for" required></textarea>
+    <button type="submit">Send message</button>
+    <p class="cnote" id="cnote"></p>
+  </form>
+  <script>
+  (function(){
+    var f=document.getElementById('cform'), note=document.getElementById('cnote');
+    function val(k){ var el=f.querySelector('[name="'+k+'"]'); return el?el.value.trim():''; }
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var payload={name:val('name'), company:val('company'), email:val('email'), message:val('message')};
+      if(!payload.name || !payload.email || !payload.message){
+        note.textContent='Please fill in your name, email, and message.'; note.style.color='#b4720e'; return;
+      }
+      var btn=f.querySelector('button'); btn.disabled=true; btn.textContent='Sending…';
+      fetch('https://rrxejaeiurdpntfczxbe.supabase.co/functions/v1/contact-form',{
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+      }).then(function(){
+        f.reset(); btn.disabled=false; btn.textContent='Send message';
+        note.textContent='Thanks! Your message has been sent — we’ll reply within one business day.'; note.style.color='#1e8a5e';
+      }).catch(function(){
+        btn.disabled=false; btn.textContent='Send message';
+        note.textContent='Couldn’t send just now — please email support@peerscrm.com directly.'; note.style.color='#b4720e';
+      });
+    });
+  })();
+  </script>
 
   <h2>Business details</h2>
   <div class="biz">
